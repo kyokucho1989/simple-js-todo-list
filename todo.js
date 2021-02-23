@@ -1,5 +1,25 @@
+//Select DOM
 
+const todoButton = document.querySelector(".todo-button");
+const deleteButton = document.querySelector(".delete-button");
+const taskContent = document.querySelector(".task-content");
+//Event Listeners
+todoButton.addEventListener("click", addTodo);
+deleteButton.addEventListener("click", deleteTodo);
+taskContent.addEventListener("click", editTodo);
+//Functions
+function addTodo(e) {
+  alert("タスク追加")
+}
 
+function deleteTodo(e) {
+  alert("タスク削除")
+}
+
+function editTodo(e) {
+  alert("タスク編集")
+  console.log(this)
+}
 /*
 var app = new Vue({
   el: '#app',
