@@ -1,12 +1,12 @@
 //Select DOM
 
-const todoButton = document.querySelector(".todo-button");
-const deleteButton = document.querySelector(".delete-button");
-const taskContent = document.querySelector(".task-content");
+const todoButton = document.querySelector(".todo-button")
+const deleteButton = document.querySelector(".delete-button")
+const todoContent = document.querySelector(".task-content")
 //Event Listeners
-todoButton.addEventListener("click", addTodo);
-deleteButton.addEventListener("click", deleteTodo);
-taskContent.addEventListener("click", editTodo);
+todoButton.addEventListener("click", addTodo)
+deleteButton.addEventListener("click", deleteTodo)
+todoContent.addEventListener("click", editTodo)
 //Functions
 function addTodo(e) {
   alert("タスク追加")
@@ -17,9 +17,39 @@ function deleteTodo(e) {
 }
 
 function editTodo(e) {
-  alert("タスク編集")
-  console.log(this)
+  //alert("タスク編集")
+  if(!this.classList.contains("on")) {
+    let beforeThis = this
+    this.classList.add("on");
+    let contentBeforeEdit = this.textContent
+    this.innerHTML = '<input type="text" class="editbox" value="'+contentBeforeEdit+'" />'
+    const editContent = document.querySelector(".editbox")
+
+    let saveTodoContent = function(){
+      this.parentNode.classList.remove('on')
+      let txtvalue = this.value
+      if (txtvalue ==""){
+       txtvalue = this.defaultValue
+      }
+      this.parentNode.innerHTML = txtvalue
+    }
+
+    editContent.addEventListener("blur",saveTodoContent)
+  }
+
 }
+/*
+function saveTodoContent(todothis,beforeTxt){
+  todothis.classList.remove('on')
+  let txtvalue = todothis.value
+  if (txtvalue ==""){
+   // txtvalue = beforeTxt
+  }else{
+    todothis.innerHTML = txtvalue
+  }
+  
+}
+*/
 /*
 var app = new Vue({
   el: '#app',
