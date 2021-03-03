@@ -1,25 +1,65 @@
-//Select DOM
 
-const todoButton = document.querySelector(".todo-button")
-const deleteButton = document.querySelector(".delete-button")
-const todoContent = document.querySelector(".task-content")
+
+//Select DOM
+const todoInput = document.querySelector(".todo-input")
+const addButton = document.querySelector(".add-button")
+//const deleteButton = document.querySelector(".delete-button")
+//const todoContent = document.querySelector(".todo-content")
+const todoList = document.querySelector(".todo-list")
+
 //Event Listeners
-todoButton.addEventListener("click", addTodo)
-deleteButton.addEventListener("click", deleteTodo)
-todoContent.addEventListener("click", editTodo)
+addButton.addEventListener("click", addTodo)
+//todoList.addEventListener("click", editOrdeleteOrStateChange)
+//deleteButton.addEventListener("click", deleteTodo)
+//todoContent[0].addEventListener("click", editTodo)
+
+
 //Functions
 function addTodo(e) {
-  alert("タスク追加")
+  if(todoInput.value == ""){
+    return
+  }
+  //alert("タスク追加")
+
+  const newTodo = document.createElement("li")
+
+  // todo名　追加
+  const todoContent = document.createElement("span")
+  todoContent.innerText = todoInput.value
+  todoContent.addEventListener("click", editTodo)
+  todoContent.classList.add("todo-content")
+  newTodo.appendChild(todoContent)
+
+  //完了 未着手ボタン
+  const checkButton = document.createElement("button")
+  checkButton.addEventListener("click", switchState)
+  checkButton.innerHTML = `□ 未着手`
+  checkButton.classList.add("check-button")
+  newTodo.appendChild(checkButton)
+
+  //削除ボタン
+  const deleteButton = document.createElement("button")
+  deleteButton.addEventListener("click", deleteTodo)
+  deleteButton.innerHTML = `削除`
+  deleteButton.classList.add("delete-button")
+  newTodo.appendChild(deleteButton)
+
+
+  todoList.appendChild(newTodo)
+
+   todoInput.value = ""
 }
 
 function deleteTodo(e) {
-  alert("タスク削除")
+  //console.log(e.target)
+  //alert("タスク削除")
+  let itemToDelete = e.target.parentNode
+  itemToDelete.remove()
 }
 
 function editTodo(e) {
   //alert("タスク編集")
   if(!this.classList.contains("on")) {
-    let beforeThis = this
     this.classList.add("on");
     let contentBeforeEdit = this.textContent
     this.innerHTML = '<input type="text" class="editbox" value="'+contentBeforeEdit+'" />'
@@ -36,75 +76,15 @@ function editTodo(e) {
 
     editContent.addEventListener("blur",saveTodoContent)
   }
-
 }
-/*
-function saveTodoContent(todothis,beforeTxt){
-  todothis.classList.remove('on')
-  let txtvalue = todothis.value
-  if (txtvalue ==""){
-   // txtvalue = beforeTxt
+function switchState(e){
+  //alert("状態切り替え")
+  let itemToSwitchState = e.target
+  if (!itemToSwitchState.classList.contains('complete')){
+    itemToSwitchState.innerHTML =`完了`
+    itemToSwitchState.classList.add('complete')
   }else{
-    todothis.innerHTML = txtvalue
+    itemToSwitchState.innerHTML =`□ 未着手`
+    itemToSwitchState.classList.remove('complete')
   }
-  
 }
-*/
-/*
-var app = new Vue({
-  el: '#app',
-  data:{
-    todolists: [
-      {id:1, content:"歯磨き" ,isCompleted: false ,isEditing: false},
-      {id:2, content:"買い物", isCompleted: false,isEditing: false},
-      {id:3, content:"勉強", isCompleted: false, isEditing: false}
-    ]
-  },
-  
-  methods: {
-    addTask: function(){
-
-      var new_content = this.$refs.new_content.value;
-      console.log (new_content);
-      if (new_content.trim().length == 0){
-        return;
-      }
-      var ids = this.todolists.map(function(todo) {
-        return todo.id;
-      });
-      var max_id = ids.reduce(function(a, b) {
-        return Math.max(a, b);
-      });
-
-      this.todolists.push(
-        {content: new_content,id:max_id+1,isCompleted: false ,isEditing: false}
-      );
-      this.todolists.forEach((todo) => todo.isEditing = false);
-    },
-    
-    deleteTask: function(item){
-      var index = this.todolists.indexOf(item);
-      this.todolists.splice(index,1);
-    },
-    editTask: function(item){
-      
-      //this.beforeEditCache = item.content;
-      this.todolists.forEach((todo) => todo.isEditing = false);
-      
-     item.isEditing = true;
-    },
-    doneEdit: function(item){
-      /*
-      if (item.content.trim() == '') {
-        item.content = this.beforeEditCache
-      }*/
-      /*
-      item.isEditing = false
-    },
-    
-    changeState: function(item){
-      item.isCompleted = !item.isCompleted;
-    }
-  }
-});
-*/
