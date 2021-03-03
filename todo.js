@@ -3,16 +3,10 @@
 //Select DOM
 const todoInput = document.querySelector(".todo-input")
 const addButton = document.querySelector(".add-button")
-//const deleteButton = document.querySelector(".delete-button")
-//const todoContent = document.querySelector(".todo-content")
 const todoList = document.querySelector(".todo-list")
 
 //Event Listeners
 addButton.addEventListener("click", addTodo)
-//todoList.addEventListener("click", editOrdeleteOrStateChange)
-//deleteButton.addEventListener("click", deleteTodo)
-//todoContent[0].addEventListener("click", editTodo)
-
 
 //Functions
 function addTodo(e) {
@@ -43,7 +37,6 @@ function addTodo(e) {
   deleteButton.innerHTML = `削除`
   deleteButton.classList.add("delete-button")
   newTodo.appendChild(deleteButton)
-
 
   todoList.appendChild(newTodo)
 
