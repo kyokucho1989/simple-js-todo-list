@@ -3,26 +3,57 @@
 
 //Functions
 const addTodo = function addTodoFromInput(e) {
-  /*
-  if(todoInput.value == ""){
-    return
-  }
-*/
+  const todoInput = document.querySelector(`.todo-input`);
   
-  alert(`タスク追加`);
-/*
-  const newTodo = document.createElement("li")
+  if(todoInput.value == ``){
+    return;
+  }
+
+  
+  //alert(`タスク追加:`+todoInput.value);
+
+
+  const newTodo = document.createElement(`li`);
+
+  // タスク名　追加
+  const todoContent = document.createElement(`span`);
+  todoContent.innerText = todoInput.value;
+  todoContent.classList.add(`todo-content`);
+  newTodo.appendChild(todoContent);
+
+
+  //完了 未着手ボタン
+  const checkButton = document.createElement(`button`);
+  //checkButton.addEventListener("click", switchState);
+  checkButton.innerHTML = `完了/未着手`;
+  checkButton.classList.add(`check-button`);
+  newTodo.appendChild(checkButton);
+
+  //削除ボタン
+  const deleteButton = document.createElement(`button`);
+  //deleteButton.addEventListener("click", deleteTodo);
+  deleteButton.innerHTML = `削除`;
+  deleteButton.classList.add(`delete-button`);
+  newTodo.appendChild(deleteButton);
+
+
+//　上記内容をlistへ追加
+  todoList.appendChild(newTodo);
+
+  todoInput.value = ``;
 
   // todo名　追加
+  /*
   const todoContent = document.createElement("span")
   todoContent.innerText = todoInput.value
   todoContent.addEventListener("click", editTodo)
   todoContent.classList.add("todo-content")
   newTodo.appendChild(todoContent)
-
+*/
+/*
   //完了 未着手ボタン
   const checkButton = document.createElement("button")
-  checkButton.addEventListener("click", switchState)
+  //checkButton.addEventListener("click", switchState)
   checkButton.innerHTML = `□ 未着手`
   checkButton.classList.add("check-button")
   newTodo.appendChild(checkButton)
@@ -42,6 +73,7 @@ const addTodo = function addTodoFromInput(e) {
 
 //Select DOM
 const addButton = document.querySelector(`.todo-button`);
+const todoList = document.querySelector(`.todo-list`);
 addButton.addEventListener(`click`, addTodo);
 
 /*
