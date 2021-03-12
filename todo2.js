@@ -2,45 +2,45 @@
 
 
 //Functions
-const addTodo = function addTodoFromInput(e) {
-  const todoInput = document.querySelector(`.todo-input`);
+const addTodo = () => {
+  const todoInput = document.querySelector('.todo-input');
   
-  if(todoInput.value == ``){
+  if(todoInput.value == ''){
     return;
   }
 
   
-  //alert(`タスク追加:`+todoInput.value);
+  //alert(`タスク追加:${todoInput.value}`);
 
 
-  const newTodo = document.createElement(`li`);
+  const newTodo = document.createElement('li');
 
   // タスク名　追加
-  const todoContent = document.createElement(`span`);
+  const todoContent = document.createElement('span');
   todoContent.innerText = todoInput.value;
-  todoContent.classList.add(`todo-content`);
+  todoContent.classList.add('todo-content');
   newTodo.appendChild(todoContent);
 
 
   //完了 未着手ボタン
-  const checkButton = document.createElement(`button`);
-  //checkButton.addEventListener("click", switchState);
-  checkButton.innerHTML = `完了/未着手`;
-  checkButton.classList.add(`check-button`);
+  const checkButton = document.createElement('button');
+  checkButton.addEventListener('click', switchState);
+  checkButton.innerHTML = '□未着手';
+  checkButton.classList.add('check-button');
   newTodo.appendChild(checkButton);
 
   //削除ボタン
-  const deleteButton = document.createElement(`button`);
+  const deleteButton = document.createElement('button');
   //deleteButton.addEventListener("click", deleteTodo);
-  deleteButton.innerHTML = `削除`;
-  deleteButton.classList.add(`delete-button`);
+  deleteButton.innerHTML = '削除';
+  deleteButton.classList.add('delete-button');
   newTodo.appendChild(deleteButton);
 
 
 //　上記内容をlistへ追加
   todoList.appendChild(newTodo);
 
-  todoInput.value = ``;
+  todoInput.value = '';
 
   // todo名　追加
   /*
@@ -70,11 +70,21 @@ const addTodo = function addTodoFromInput(e) {
    todoInput.value = ""
    */
 }
+const switchState = (e) => {
+  let itemToSwitchState = e.target;
+  if (!itemToSwitchState.classList.contains('complete')){
+    itemToSwitchState.innerHTML ='完了';
+    itemToSwitchState.classList.add('complete');
+  }else{
+    itemToSwitchState.innerHTML ='□ 未着手';
+    itemToSwitchState.classList.remove('complete');
+  }
+}
 
 //Select DOM
-const addButton = document.querySelector(`.todo-button`);
-const todoList = document.querySelector(`.todo-list`);
-addButton.addEventListener(`click`, addTodo);
+const addButton = document.querySelector('.todo-button');
+const todoList = document.querySelector('.todo-list');
+addButton.addEventListener('click', addTodo);
 
 /*
 
@@ -103,17 +113,6 @@ function editTodo(e) {
     }
 
     editContent.addEventListener("blur",saveTodoContent)
-  }
-}
-function switchState(e){
-  //alert("状態切り替え")
-  let itemToSwitchState = e.target
-  if (!itemToSwitchState.classList.contains('complete')){
-    itemToSwitchState.innerHTML =`完了`
-    itemToSwitchState.classList.add('complete')
-  }else{
-    itemToSwitchState.innerHTML =`□ 未着手`
-    itemToSwitchState.classList.remove('complete')
   }
 }
 */
