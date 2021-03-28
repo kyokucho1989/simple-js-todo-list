@@ -18,6 +18,7 @@ const addTodo = () => {
   // タスク名　追加
   const todoContent = document.createElement('span');
   todoContent.innerText = todoInput.value;
+  todoContent.addEventListener('click', editTodo); //追加
   todoContent.classList.add('todo-content');
   newTodo.appendChild(todoContent);
 
@@ -31,7 +32,7 @@ const addTodo = () => {
 
   //削除ボタン
   const deleteButton = document.createElement('button');
-  //deleteButton.addEventListener("click", deleteTodo);
+  deleteButton.addEventListener("click", deleteTodo);
   deleteButton.innerHTML = '削除';
   deleteButton.classList.add('delete-button');
   newTodo.appendChild(deleteButton);
@@ -78,6 +79,47 @@ const switchState = (e) => {
   }else{
     itemToSwitchState.innerHTML ='□ 未着手';
     itemToSwitchState.classList.remove('complete');
+  }
+}
+
+const deleteTodo = (e) => {
+  let itemToDelete = e.target.parentNode;
+  itemToDelete.remove();
+}
+
+const editTodo = (e) => {
+  let itemToEdit = e.target;
+  if(!itemToEdit.classList.contains('todo-content')){
+    return;
+  }
+  if(!itemToEdit.classList.contains('on')) {
+    itemToEdit.classList.add('on');
+    let contentBeforeEdit = itemToEdit.textContent;
+    itemToEdit.innerHTML = '<input type="text" class="editbox" value="'+contentBeforeEdit+'" />';
+    const editContent = document.querySelector('.editbox');
+    
+    const saveTodoContent  = (e) => {
+        let itemToSave = e.target;
+        itemToSave.parentNode.classList.remove('on');
+        let txtvalue = itemToSave.value;
+        if (txtvalue ==''){
+         txtvalue = itemToSave.defaultValue;
+        }
+        itemToSave.parentNode.innerHTML = txtvalue;
+    }
+    editContent.addEventListener('blur',saveTodoContent);
+    /*
+    let saveTodoContent = function(){
+      this.parentNode.classList.remove('on');
+      let txtvalue = this.value;
+      if (txtvalue ==''){
+       txtvalue = this.defaultValue;
+      }
+      this.parentNode.innerHTML = txtvalue;
+    }
+    */
+
+    //editContent.addEventListener('blur',saveTodoContent);
   }
 }
 
