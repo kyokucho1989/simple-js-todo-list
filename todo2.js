@@ -92,35 +92,23 @@ const editTodo = (e) => {
   if(!itemToEdit.classList.contains('todo-content')){
     return;
   }
-  if(!itemToEdit.classList.contains('on')) {
-    itemToEdit.classList.add('on');
+  // if(!itemToEdit.classList.contains('on')) {
+    // itemToEdit.classList.add('on');
     let contentBeforeEdit = itemToEdit.textContent;
     itemToEdit.innerHTML = '<input type="text" class="editbox" value="'+contentBeforeEdit+'" />';
     const editContent = document.querySelector('.editbox');
     
     const saveTodoContent  = (e) => {
         let itemToSave = e.target;
-        itemToSave.parentNode.classList.remove('on');
+        // itemToSave.parentNode.classList.remove('on');
         let txtvalue = itemToSave.value;
-        if (txtvalue ==''){
-         txtvalue = itemToSave.defaultValue;
-        }
+        // if (txtvalue ==''){
+        //  txtvalue = itemToSave.defaultValue;
+        // }
         itemToSave.parentNode.innerHTML = txtvalue;
     }
     editContent.addEventListener('blur',saveTodoContent);
-    /*
-    let saveTodoContent = function(){
-      this.parentNode.classList.remove('on');
-      let txtvalue = this.value;
-      if (txtvalue ==''){
-       txtvalue = this.defaultValue;
-      }
-      this.parentNode.innerHTML = txtvalue;
-    }
-    */
-
-    //editContent.addEventListener('blur',saveTodoContent);
-  }
+  // }
 }
 
 //Select DOM
