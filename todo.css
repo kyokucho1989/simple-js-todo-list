@@ -1,10 +1,8 @@
-/*
 *{
   margin: 0;
   padding: 0;
-  /*box-sizing: border-box;*/
+  box-sizing: border-box; 
 
-  /*
 }
 
 body{
@@ -22,14 +20,16 @@ header,.input-form{
   align-items: center;
 }
 
-.todo-list{
+.todo-container{
   display:flex;
   justify-content: center;
   align-items: center;
   margin:1rem;
+  /* font-size: 1.5rem; */
 }
+
 /* ボタン追加 */
-/*
+/* 
 .input-form input,
 .input-form button,
 .todo-list button {
@@ -70,27 +70,32 @@ header,.input-form{
 .input-form button:active ,
 .todo-list button:active {
   background: #4e3934;
-}
+}  */
 
 /* タスクのデザイン*/
-/*
-.todo-item{
+
+.todo-content{
   padding: 0.5rem;
   min-width: 30%;
+  /* font-size: 1.5rem; */
   background: #fff;
   margin: 0;
 }
-
-.todo-list input.edit-form{
-  padding: 0.5rem;
+.todo-list{
+  list-style: none;
+  /* padding: 0.5rem; */
   min-width: 30%;
-  font-size: 1rem;
-  border: none;
-  background: #fff7bc;
+  font-size: 1rem; 
   outline: none;
   cursor: pointer;
-  margin: 0;
+  margin: 0; 
+  border: none;
+  text-align: center;
 }
+ /* .todo-list.input.edit-form{
+   background: #fff7bc; 
+
+}  */
 /*
 header{
   font-size: 1.2rem;
