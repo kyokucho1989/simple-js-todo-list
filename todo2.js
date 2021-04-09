@@ -12,6 +12,8 @@ const addTodo = () => {
   
   //alert(`タスク追加:${todoInput.value}`);
 
+  const todoDiv = document.createElement('div');
+  todoDiv.classList.add("todo");
 
   const newTodo = document.createElement('li');
 
@@ -39,7 +41,8 @@ const addTodo = () => {
 
 
 //　上記内容をlistへ追加
-  todoList.appendChild(newTodo);
+  todoDiv.appendChild(newTodo);
+  todoList.appendChild(todoDiv);
 
   todoInput.value = '';
 
