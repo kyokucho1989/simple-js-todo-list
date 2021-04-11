@@ -8,13 +8,10 @@ const addTodo = () => {
   if(todoInput.value == ''){
     return;
   }
-
-  
   //alert(`タスク追加:${todoInput.value}`);
 
   const todoDiv = document.createElement('div');
   todoDiv.classList.add("todo");
-
   const newTodo = document.createElement('li');
 
   // タスク名　追加
@@ -23,70 +20,49 @@ const addTodo = () => {
   todoContent.addEventListener('click', editTodo); //追加
   todoContent.classList.add('todo-content');
   newTodo.appendChild(todoContent);
-
+  todoDiv.appendChild(newTodo);
 
   //完了 未着手ボタン
   const checkButton = document.createElement('button');
   checkButton.addEventListener('click', switchState);
-  checkButton.innerHTML = '□未着手';
+  // checkButton.innerHTML = '□未着手';
+  checkButton.innerHTML = '<i class="far fa-square"></i>';
   checkButton.classList.add('check-button');
-  newTodo.appendChild(checkButton);
+  todoDiv.appendChild(checkButton);
 
   //削除ボタン
   const deleteButton = document.createElement('button');
   deleteButton.addEventListener("click", deleteTodo);
-  deleteButton.innerHTML = '削除';
+  deleteButton.innerHTML = '<i class="far fa-trash-alt"></i>';
   deleteButton.classList.add('delete-button');
-  newTodo.appendChild(deleteButton);
+  // newTodo.appendChild(deleteButton);
+  todoDiv.appendChild(deleteButton);
 
 
 //　上記内容をlistへ追加
-  todoDiv.appendChild(newTodo);
   todoList.appendChild(todoDiv);
 
   todoInput.value = '';
 
-  // todo名　追加
-  /*
-  const todoContent = document.createElement("span")
-  todoContent.innerText = todoInput.value
-  todoContent.addEventListener("click", editTodo)
-  todoContent.classList.add("todo-content")
-  newTodo.appendChild(todoContent)
-*/
-/*
-  //完了 未着手ボタン
-  const checkButton = document.createElement("button")
-  //checkButton.addEventListener("click", switchState)
-  checkButton.innerHTML = `□ 未着手`
-  checkButton.classList.add("check-button")
-  newTodo.appendChild(checkButton)
-
-  //削除ボタン
-  const deleteButton = document.createElement("button")
-  deleteButton.addEventListener("click", deleteTodo)
-  deleteButton.innerHTML = `削除`
-  deleteButton.classList.add("delete-button")
-  newTodo.appendChild(deleteButton)
-
-  todoList.appendChild(newTodo)
-
-   todoInput.value = ""
-   */
 }
 const switchState = (e) => {
   let itemToSwitchState = e.target;
-  if (!itemToSwitchState.classList.contains('complete')){
-    itemToSwitchState.innerHTML ='完了';
-    itemToSwitchState.classList.add('complete');
+  if (!itemToSwitchState.classList.contains('check-button')){
+    itemToSwitchState = e.target.parentNode;
+  }
+  if (!itemToSwitchState.parentNode.classList.contains('complete')){
+    // itemToSwitchState.innerHTML ='完了';
+    itemToSwitchState.innerHTML ='<i class="far fa-check-square"></i>';
+    itemToSwitchState.parentNode.classList.add('complete');
   }else{
-    itemToSwitchState.innerHTML ='□ 未着手';
-    itemToSwitchState.classList.remove('complete');
+    // itemToSwitchState.innerHTML ='□ 未着手';
+    itemToSwitchState.innerHTML ='<i class="far fa-square"></i>';
+    itemToSwitchState.parentNode.classList.remove('complete');
   }
 }
 
 const deleteTodo = (e) => {
-  let itemToDelete = e.target.parentNode;
+  let itemToDelete = e.target.parentNode.parentNode;
   itemToDelete.remove();
 }
 
