@@ -11,7 +11,7 @@ const addTodo = () => {
   //alert(`タスク追加:${todoInput.value}`);
 
   const todoDiv = document.createElement('div');
-  todoDiv.classList.add("todo");
+  todoDiv.classList.add('todo');
   const newTodo = document.createElement('li');
 
   // タスク名　追加
