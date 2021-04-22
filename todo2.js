@@ -1,6 +1,3 @@
-
-
-
 //Functions
 const addTodo = () => {
   const todoInput = document.querySelector('.todo-input');
@@ -11,7 +8,7 @@ const addTodo = () => {
   //alert(`タスク追加:${todoInput.value}`);
 
   const todoDiv = document.createElement('div');
-  todoDiv.classList.add("todo");
+  todoDiv.classList.add('todo');
   const newTodo = document.createElement('li');
 
   // タスク名　追加
@@ -71,57 +68,22 @@ const editTodo = (e) => {
   if(!itemToEdit.classList.contains('todo-content')){
     return;
   }
-  // if(!itemToEdit.classList.contains('on')) {
-    // itemToEdit.classList.add('on');
     let contentBeforeEdit = itemToEdit.textContent;
     itemToEdit.innerHTML = '<input type="text" class="editbox" value="'+contentBeforeEdit+'" />';
     const editContent = document.querySelector('.editbox');
     
     const saveTodoContent  = (e) => {
         let itemToSave = e.target;
-        // itemToSave.parentNode.classList.remove('on');
         let txtvalue = itemToSave.value;
-        // if (txtvalue ==''){
-        //  txtvalue = itemToSave.defaultValue;
-        // }
+        if (txtvalue ==''){
+         txtvalue = itemToSave.defaultValue;
+        }
         itemToSave.parentNode.innerHTML = txtvalue;
     }
     editContent.addEventListener('blur',saveTodoContent);
-  // }
 }
 
 //Select DOM
 const addButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
 addButton.addEventListener('click', addTodo);
-
-/*
-
-function deleteTodo(e) {
-  //console.log(e.target)
-  //alert("タスク削除")
-  let itemToDelete = e.target.parentNode
-  itemToDelete.remove()
-}
-
-function editTodo(e) {
-  //alert("タスク編集")
-  if(!this.classList.contains("on")) {
-    this.classList.add("on");
-    let contentBeforeEdit = this.textContent
-    this.innerHTML = '<input type="text" class="editbox" value="'+contentBeforeEdit+'" />'
-    const editContent = document.querySelector(".editbox")
-
-    let saveTodoContent = function(){
-      this.parentNode.classList.remove('on')
-      let txtvalue = this.value
-      if (txtvalue ==""){
-       txtvalue = this.defaultValue
-      }
-      this.parentNode.innerHTML = txtvalue
-    }
-
-    editContent.addEventListener("blur",saveTodoContent)
-  }
-}
-*/
